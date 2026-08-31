@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FinanceFlow — Sua vida financeira, no piloto automático</title>
+<meta name="description" content="Registre gastos e receitas só de voz. Controle total das suas finanças, investimentos e metas — por R$29,91/mês.">
+<style>
+  :root{
+    --bg:#060809; --bg2:#0c1216; --card:#12161a; --border:rgba(255,255,255,.08);
+    --blue:#009ee3; --blue2:#1e6fa8; --text:#f2f2f2; --muted:#9a9a9a; --muted2:#c7c7c7;
+    --green:#22c55e;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg); color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.55; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:560px; margin:0 auto; padding:0 20px;}
+  a{color:inherit; text-decoration:none;}
+
+  /* HERO */
+  header.hero{
+    padding:48px 0 40px;
+    background:
+      radial-gradient(120% 100% at 50% 0%, rgba(0,158,227,.18), transparent 60%),
+      linear-gradient(180deg, var(--bg2), var(--bg));
+    text-align:center;
+  }
+  .logo{
+    width:76px; height:76px; border-radius:20px; margin:0 auto 18px;
+    background:linear-gradient(135deg,#1e6fa8,#009ee3);
+    display:flex; align-items:center; justify-content:center;
+    font-weight:900; font-size:30px; color:#fff;
+    box-shadow:0 12px 32px rgba(0,158,227,.35);
+  }
+  h1{font-size:26px; font-weight:800; letter-spacing:-.3px; margin-bottom:10px;}
+  .hero p.tag{font-size:16px; color:var(--muted2); max-width:400px; margin:0 auto;}
+  .hero .badge{
+    display:inline-flex; align-items:center; gap:6px; margin-top:18px;
+    background:rgba(0,158,227,.12); border:1px solid rgba(0,158,227,.3);
+    color:var(--blue); font-size:13px; font-weight:700; padding:7px 14px; border-radius:999px;
+  }
+
+  /* SECTIONS */
+  section{padding:36px 0; border-top:1px solid var(--border);}
+  h2{font-size:19px; font-weight:800; margin-bottom:6px;}
+  .sub{color:var(--muted); font-size:14px; margin-bottom:20px;}
+
+  /* FEATURES */
+  .feat-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+  .feat{
+    background:var(--card); border:1px solid var(--border); border-radius:14px;
+    padding:16px 14px;
+  }
+  .feat .ic{font-size:22px; margin-bottom:8px;}
+  .feat .t{font-size:14px; font-weight:700; margin-bottom:3px;}
+  .feat .d{font-size:12.5px; color:var(--muted);}
+
+  /* VOICE CALLOUT */
+  .voice-card{
+    background:linear-gradient(135deg, rgba(0,158,227,.15), rgba(30,111,168,.08));
+    border:1px solid rgba(0,158,227,.3); border-radius:18px; padding:24px 20px; text-align:center;
+  }
+  .voice-card .mic{font-size:38px; margin-bottom:10px;}
+  .voice-card h3{font-size:17px; font-weight:800; margin-bottom:6px;}
+  .voice-card p{font-size:14px; color:var(--muted2);}
+  .voice-card .example{
+    margin-top:14px; background:rgba(0,0,0,.25); border-radius:10px; padding:10px 14px;
+    font-size:13px; color:#dfe9ee; font-style:italic; display:inline-block;
+  }
+
+  /* VIDEOS */
+  .video-list{display:flex; flex-direction:column; gap:14px;}
+  .video-card{
+    background:var(--card); border:1px solid var(--border); border-radius:16px; overflow:hidden;
+  }
+  .video-frame{
+    aspect-ratio:16/9; width:100%; position:relative;
+    background:linear-gradient(135deg,#12161a,#1a2128);
+    display:flex; align-items:center; justify-content:center; flex-direction:column; gap:8px;
+  }
+  .video-frame video{width:100%; height:100%; object-fit:cover; display:block;}
+  .play-ic{
+    width:48px; height:48px; border-radius:50%; background:rgba(0,158,227,.9);
+    display:flex; align-items:center; justify-content:center; font-size:18px; color:#fff;
+  }
+  .video-frame .soon{color:var(--muted); font-size:12.5px; font-weight:600;}
+  .video-meta{padding:12px 14px;}
+  .video-meta .t{font-size:14px; font-weight:700;}
+  .video-meta .d{font-size:12.5px; color:var(--muted); margin-top:2px;}
+
+  /* DOWNLOAD */
+  .dl-card{
+    background:var(--card); border:1px solid var(--border); border-radius:16px; padding:18px;
+    display:flex; align-items:center; gap:14px; margin-bottom:12px;
+  }
+  .dl-card .ic{
+    width:46px; height:46px; border-radius:12px; background:rgba(255,255,255,.06);
+    display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0;
+  }
+  .dl-card .info{flex:1; min-width:0;}
+  .dl-card .t{font-size:15px; font-weight:800;}
+  .dl-card .d{font-size:12.5px; color:var(--muted); margin-top:2px;}
+  .btn{
+    display:block; text-align:center; width:100%; padding:14px; border-radius:12px;
+    font-size:15px; font-weight:800; margin-top:10px; border:none;
+  }
+  .btn-primary{background:linear-gradient(135deg,#1e6fa8,#009ee3); color:#fff;}
+  .btn-outline{background:transparent; border:1px solid var(--border); color:var(--text);}
+  .steps{margin-top:10px; padding-left:18px; font-size:12.5px; color:var(--muted);}
+  .steps li{margin-bottom:3px;}
+
+  /* PRO */
+  .pro-card{
+    background:linear-gradient(160deg, #1a1408, #12161a); border:1px solid rgba(255,196,0,.25);
+    border-radius:18px; padding:22px 20px;
+  }
+  .pro-card .crown{font-size:26px;}
+  .pro-card h3{font-size:18px; font-weight:800; margin:8px 0 4px;}
+  .pro-card .price{font-size:28px; font-weight:900; color:#ffce45; margin:10px 0 2px;}
+  .pro-card .price span{font-size:13px; font-weight:600; color:var(--muted);}
+  .pro-list{list-style:none; margin:14px 0 18px;}
+  .pro-list li{font-size:13.5px; color:var(--muted2); margin-bottom:7px; padding-left:22px; position:relative;}
+  .pro-list li::before{content:"✓"; position:absolute; left:0; color:#ffce45; font-weight:900;}
+  .btn-pro{background:linear-gradient(135deg,#ffce45,#ff9a3c); color:#1a1408;}
+
+  footer{padding:30px 0 44px; text-align:center;}
+  footer p{font-size:12px; color:var(--muted);}
+  footer .foot-logo{font-weight:800; color:var(--muted2); font-size:13px; margin-bottom:6px;}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="logo">FF</div>
+    <h1>FinanceFlow</h1>
+    <p class="tag">Controle suas finanças pessoais falando naturalmente — registre gastos e receitas por voz, acompanhe metas e investimentos, tudo em um só app.</p>
+    <span class="badge">🎤 Registro por comando de voz</span>
+  </div>
+</header>
+
+<section id="sobre">
+  <div class="wrap">
+    <h2>O que é o FinanceFlow</h2>
+    <p class="sub">Um app completo de gestão financeira pessoal — pensado pra quem quer registrar o dia a dia rápido e entender pra onde o dinheiro vai, sem planilha e sem complicação.</p>
+    <div class="feat-grid">
+      <div class="feat"><div class="ic">💸</div><div class="t">Transações</div><div class="d">Receitas e despesas organizadas por categoria automaticamente.</div></div>
+      <div class="feat"><div class="ic">🎯</div><div class="t">Metas</div><div class="d">Defina objetivos e acompanhe o progresso de cada um.</div></div>
+      <div class="feat"><div class="ic">📈</div><div class="t">Investimentos</div><div class="d">Monitore sua carteira e receba recomendações por perfil.</div></div>
+      <div class="feat"><div class="ic">📅</div><div class="t">Calendário</div><div class="d">Eventos e compromissos financeiros organizados por data.</div></div>
+      <div class="feat"><div class="ic">📚</div><div class="t">Educação</div><div class="d">Biblioteca de leitura pra evoluir sua relação com o dinheiro.</div></div>
+      <div class="feat"><div class="ic">🧠</div><div class="t">Gestor IA</div><div class="d">Assistente que entende sua fala e lança tudo automaticamente.</div></div>
+      <div class="feat"><div class="ic">📊</div><div class="t">Relatórios</div><div class="d">Exporte em PDF ou Excel sempre que precisar.</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="voz">
+  <div class="wrap">
+    <div class="voice-card">
+      <div class="mic">🎤</div>
+      <h3>Fale. O app registra.</h3>
+      <p>Sem formulário, sem digitar valor por valor. É só falar naturalmente que o FinanceFlow entende o valor, a categoria e a conta.</p>
+      <div class="example">"Gastei 50 reais no mercado"</div>
+    </div>
+  </div>
+</section>
+
+<section id="pro">
+  <div class="wrap">
+    <div class="pro-card">
+      <h3>Acesso ao FinanceFlow</h3>
+      <p style="font-size:13.5px; color:var(--muted2);">Assine para ter acesso ao app.</p>
+      <div style="font-size:15px; color:var(--muted); text-decoration:line-through; margin-top:8px;">12x de R$ 59,90</div>
+      <div class="price" style="margin-top:0;">12x de R$ 29,91</div>
+      <a class="btn btn-pro" id="btn-assinar" href="https://mpago.li/1CRbwCh" target="_blank" rel="noopener" style="margin-top:16px;">Assinar agora</a>
+    </div>
+    <p id="msg-pendente" style="text-align:center; font-size:12.5px; color:var(--muted); margin-top:14px;">
+      🔒 O vídeo explicativo e o link de download aparecem aqui embaixo assim que o pagamento for confirmado.
+    </p>
+    <p id="msg-confirmado" style="display:none; text-align:center; font-size:13px; color:#22c55e; font-weight:700; margin-top:14px;">
+      ✅ Pagamento confirmado! Veja o vídeo e baixe o app abaixo.
+    </p>
+  </div>
+</section>
+
+<div id="pos-pagamento" style="display:none;">
+
+<section id="videos">
+  <div class="wrap">
+    <h2>Veja como funciona</h2>
+    <p class="sub">Vídeos rápidos mostrando o app na prática.</p>
+    <div class="video-list">
+      <div class="video-card">
+        <div class="video-frame" data-video-slot="voz">
+          <div class="play-ic">▶</div>
+          <div class="soon">Vídeo em breve</div>
+        </div>
+        <div class="video-meta">
+          <div class="t">Comando de voz na prática</div>
+          <div class="d">Veja um gasto sendo registrado só de voz, em segundos.</div>
+        </div>
+      </div>
+      <div class="video-card">
+        <div class="video-frame" data-video-slot="ios">
+          <div class="play-ic">▶</div>
+          <div class="soon">Vídeo em breve</div>
+        </div>
+        <div class="video-meta">
+          <div class="t">Como instalar no iPhone</div>
+          <div class="d">Passo a passo pelo TestFlight, do zero até o primeiro uso.</div>
+        </div>
+      </div>
+      <div class="video-card">
+        <div class="video-frame" data-video-slot="android">
+          <div class="play-ic">▶</div>
+          <div class="soon">Vídeo em breve</div>
+        </div>
+        <div class="video-meta">
+          <div class="t">Como instalar no Android</div>
+          <div class="d">Baixe o APK e instale direto, sem precisar da Play Store.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="baixar">
+  <div class="wrap">
+    <h2>Baixar o app</h2>
+    <p class="sub">Escolha seu aparelho:</p>
+
+    <div class="dl-card">
+      <div class="ic">🍎</div>
+      <div class="info">
+        <div class="t">iPhone (iOS)</div>
+        <div class="d">Via TestFlight — app oficial da Apple para testes</div>
+      </div>
+    </div>
+    <a class="btn btn-primary" href="https://testflight.apple.com/join/hE8fctBh" target="_blank" rel="noopener">Baixar para iPhone</a>
+    <ul class="steps">
+      <li>Toque no link acima e instale o app TestFlight se pedir</li>
+      <li>Depois toque em "Instalar" pra baixar o FinanceFlow</li>
+    </ul>
+
+    <div style="height:22px"></div>
+
+    <div class="dl-card">
+      <div class="ic">🤖</div>
+      <div class="info">
+        <div class="t">Android</div>
+        <div class="d">Instalação direta, sem precisar da Play Store</div>
+      </div>
+    </div>
+    <a class="btn btn-primary" href="https://raw.githubusercontent.com/MiguelRios26/financeflow-ios/main/android/FinanceFlow_novo.apk">Baixar para Android</a>
+    <ul class="steps">
+      <li>Toque no link acima pra baixar o arquivo .apk</li>
+      <li>Abra o arquivo baixado e permita "instalar de fontes desconhecidas"</li>
+    </ul>
+  </div>
+</section>
+
+</div>
+
+<script>
+(function () {
+  try {
+    var params = new URLSearchParams(window.location.search);
+    if (params.get('pago') === '1') {
+      var pos = document.getElementById('pos-pagamento');
+      var pend = document.getElementById('msg-pendente');
+      var conf = document.getElementById('msg-confirmado');
+      if (pos) pos.style.display = '';
+      if (pend) pend.style.display = 'none';
+      if (conf) conf.style.display = '';
+      if (pos) setTimeout(function () { pos.scrollIntoView({ behavior: 'smooth' }); }, 300);
+    }
+  } catch (e) {}
+})();
+</script>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-logo">FinanceFlow</div>
+    <p>Seus dados ficam salvos com segurança e sincronizados na sua conta.</p>
+    <p style="margin-top:10px;"><a href="./" style="color:var(--muted2); text-decoration:underline;">‹ Voltar para o site do FinanceFlow</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
