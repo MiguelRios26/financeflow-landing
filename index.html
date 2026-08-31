@@ -177,8 +177,7 @@
       <p style="font-size:13.5px; color:var(--muted2);">Assine para ter acesso ao app.</p>
       <div style="font-size:15px; color:var(--muted); text-decoration:line-through; margin-top:8px;">12x de R$ 59,90</div>
       <div class="price" style="margin-top:0;">12x de R$ 29,91</div>
-      <button class="btn btn-pro" id="btn-assinar" onclick="assinarAgora()" style="cursor:pointer; margin-top:16px;">Assinar agora</button>
-      <p id="assinar-erro" style="display:none; text-align:center; font-size:12px; color:#ff8080; margin-top:8px;">Não foi possível abrir o pagamento agora. Tente novamente em instantes.</p>
+      <a class="btn btn-pro" id="btn-assinar" href="https://mpago.li/1CRbwCh" target="_blank" rel="noopener" style="margin-top:16px;">Assinar agora</a>
     </div>
     <p id="msg-pendente" style="text-align:center; font-size:12.5px; color:var(--muted); margin-top:14px;">
       🔒 O vídeo explicativo e o link de download aparecem aqui embaixo assim que o pagamento for confirmado.
@@ -267,33 +266,6 @@
 
 </div>
 
-<script>
-var BACKEND_URL = 'https://financeflow-backend-j0p2.onrender.com';
-async function assinarAgora() {
-  var btn = document.getElementById('btn-assinar');
-  var erro = document.getElementById('assinar-erro');
-  if (erro) erro.style.display = 'none';
-  var textoOriginal = btn.textContent;
-  btn.textContent = 'Abrindo pagamento...';
-  btn.disabled = true;
-  try {
-    var resp = await fetch(BACKEND_URL + '/api/criar-pagamento-landing', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' }
-    });
-    var data = await resp.json();
-    if (data && data.init_point) {
-      window.location.href = data.init_point;
-      return;
-    }
-    throw new Error('sem init_point');
-  } catch (e) {
-    if (erro) erro.style.display = 'block';
-    btn.textContent = textoOriginal;
-    btn.disabled = false;
-  }
-}
-</script>
 <script>
 (function () {
   try {
