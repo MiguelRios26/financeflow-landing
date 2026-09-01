@@ -127,6 +127,23 @@
   .pro-list li::before{content:"✓"; position:absolute; left:0; color:#ffce45; font-weight:900;}
   .btn-pro{background:linear-gradient(135deg,#ffce45,#ff9a3c); color:#1a1408;}
 
+  /* PLANOS */
+  .plan-list{display:flex; flex-direction:column; gap:12px;}
+  .plan-card{
+    background:linear-gradient(160deg, #1a1408, #12161a); border:1px solid rgba(255,196,0,.25);
+    border-radius:16px; padding:18px 20px;
+  }
+  .plan-card.featured{border-color:rgba(255,196,0,.6); box-shadow:0 0 0 1px rgba(255,196,0,.25);}
+  .plan-head{display:flex; align-items:center; justify-content:space-between; gap:8px;}
+  .plan-name{font-size:16px; font-weight:800;}
+  .plan-tag{
+    font-size:11px; font-weight:800; color:#1a1408; background:#ffce45;
+    padding:3px 9px; border-radius:999px;
+  }
+  .plan-price{font-size:24px; font-weight:900; color:#ffce45; margin:8px 0 14px;}
+  .plan-price span{font-size:12.5px; font-weight:600; color:var(--muted);}
+  .plan-trial{font-size:12.5px; font-weight:700; color:var(--green); margin-bottom:10px;}
+
   footer{padding:30px 0 44px; text-align:center;}
   footer p{font-size:12px; color:var(--muted);}
   footer .foot-logo{font-weight:800; color:var(--muted2); font-size:13px; margin-bottom:6px;}
@@ -172,17 +189,53 @@
 
 <section id="pro">
   <div class="wrap">
-    <div class="pro-card">
-      <h3>Acesso ao FinanceFlow</h3>
-      <p style="font-size:13.5px; color:var(--muted2);">Assine para ter acesso ao app.</p>
-      <div style="font-size:15px; color:var(--muted); text-decoration:line-through; margin-top:8px;">12x de R$ 59,90</div>
-      <div class="price" style="margin-top:0;">12x de R$ 29,91</div>
-      <a class="btn btn-pro" id="btn-assinar" href="https://mpago.li/1CRbwCh" target="_blank" rel="noopener" style="margin-top:16px;">Assinar agora</a>
+    <h2>Escolha seu plano</h2>
+    <p class="sub">Acesso completo ao FinanceFlow. Cancele quando quiser.</p>
+
+    <div class="plan-list">
+      <div class="plan-card">
+        <div class="plan-head">
+          <div class="plan-name">Mensal</div>
+        </div>
+        <div class="plan-price">R$ 49,90<span>/mês</span></div>
+        <div class="plan-trial">🎁 Teste 7 dias grátis</div>
+        <a class="btn btn-pro" href="https://mpago.la/1Mpcuin" target="_blank" rel="noopener">Assinar Mensal</a>
+      </div>
+
+      <div class="plan-card">
+        <div class="plan-head">
+          <div class="plan-name">Trimestral</div>
+        </div>
+        <div class="plan-price">R$ 44,90<span>/mês</span></div>
+        <div class="plan-trial">🎁 Teste 7 dias grátis</div>
+        <a class="btn btn-pro" href="https://mpago.la/2kuQzpL" target="_blank" rel="noopener">Assinar Trimestral</a>
+      </div>
+
+      <div class="plan-card featured">
+        <div class="plan-head">
+          <div class="plan-name">Semestral</div>
+          <span class="plan-tag">Mais popular</span>
+        </div>
+        <div class="plan-price">R$ 39,90<span>/mês</span></div>
+        <div class="plan-trial">🎁 Teste 7 dias grátis</div>
+        <a class="btn btn-pro" href="https://mpago.la/1JrSfJX" target="_blank" rel="noopener">Assinar Semestral</a>
+      </div>
+
+      <div class="plan-card">
+        <div class="plan-head">
+          <div class="plan-name">Anual</div>
+          <span class="plan-tag">Melhor preço</span>
+        </div>
+        <div class="plan-price">R$ 29,90<span>/mês</span></div>
+        <div class="plan-trial">🎁 Teste 7 dias grátis</div>
+        <a class="btn btn-pro" href="https://mpago.la/2dsXzKK" target="_blank" rel="noopener">Assinar Anual</a>
+      </div>
     </div>
-    <p id="msg-pendente" style="text-align:center; font-size:12.5px; color:var(--muted); margin-top:14px;">
+
+    <p id="msg-pendente" style="text-align:center; font-size:12.5px; color:var(--muted); margin-top:18px;">
       🔒 O vídeo explicativo e o link de download aparecem aqui embaixo assim que o pagamento for confirmado.
     </p>
-    <p id="msg-confirmado" style="display:none; text-align:center; font-size:13px; color:#22c55e; font-weight:700; margin-top:14px;">
+    <p id="msg-confirmado" style="display:none; text-align:center; font-size:13px; color:#22c55e; font-weight:700; margin-top:18px;">
       ✅ Pagamento confirmado! Veja o vídeo e baixe o app abaixo.
     </p>
   </div>
@@ -275,6 +328,7 @@
   <div class="wrap">
     <div class="foot-logo">FinanceFlow</div>
     <p>Seus dados ficam salvos com segurança e sincronizados na sua conta.</p>
+    <p style="margin-top:10px;">Dúvidas? <a href="mailto:finance26.flowff@gmail.com" style="color:var(--blue); text-decoration:underline;">finance26.flowff@gmail.com</a></p>
     <p style="margin-top:10px;"><a href="./" style="color:var(--muted2); text-decoration:underline;">‹ Voltar para o site do FinanceFlow</a></p>
   </div>
 </footer>
