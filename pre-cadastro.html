@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FinanceFlow — Cadastro rápido</title>
+<link rel="icon" href="./icon-192.png" type="image/png">
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<style>
+  :root{
+    --bg:#060809; --bg2:#0c1216; --card:#12161a; --border:rgba(255,255,255,.08);
+    --blue:#009ee3; --blue2:#1e6fa8; --text:#f2f2f2; --muted:#9a9a9a; --muted2:#c7c7c7;
+    --green:#22c55e;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg); color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.55; -webkit-font-smoothing:antialiased;
+    min-height:100vh; display:flex; align-items:center; justify-content:center;
+  }
+  .wrap{max-width:420px; width:100%; margin:0 auto; padding:32px 20px;}
+  .logo{display:flex; align-items:center; gap:10px; justify-content:center; margin-bottom:28px;}
+  .logo img{width:36px; height:36px; border-radius:9px;}
+  .logo span{font-size:19px; font-weight:800;}
+  .card{
+    background:linear-gradient(160deg, var(--card), var(--bg2));
+    border:1px solid var(--border); border-radius:18px; padding:28px 24px;
+  }
+  h1{font-size:20px; font-weight:800; margin-bottom:8px; text-align:center;}
+  p.sub{font-size:13.5px; color:var(--muted2); text-align:center; margin-bottom:26px;}
+  label{display:block; font-size:12.5px; font-weight:700; color:var(--muted2); margin:0 0 6px;}
+  .field{margin-bottom:16px;}
+  input{
+    width:100%; padding:13px 14px; border-radius:10px; border:1px solid var(--border);
+    background:#0d1114; color:var(--text); font-size:15px; outline:none;
+    transition:border-color .15s;
+  }
+  input:focus{border-color:var(--blue);}
+  input::placeholder{color:#5a6068;}
+  .btn{
+    width:100%; padding:15px; border:none; border-radius:12px; margin-top:6px;
+    background:linear-gradient(135deg, var(--blue), var(--blue2)); color:#fff;
+    font-size:15.5px; font-weight:800; cursor:pointer; transition:opacity .15s;
+  }
+  .btn:disabled{opacity:.6; cursor:default;}
+  .err{color:#ef4444; font-size:12.5px; margin-top:-10px; margin-bottom:14px; display:none;}
+  .foot{margin-top:18px; text-align:center; font-size:11.5px; color:var(--muted);}
+  .foot a{color:var(--blue); text-decoration:underline;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="logo">
+    <img src="./icon-192.png" alt="FinanceFlow" onerror="this.style.display='none'">
+    <span>FinanceFlow</span>
+  </div>
+  <div class="card">
+    <h1>Vamos começar 👋</h1>
+    <p class="sub">Deixe seus dados pra gente te ajudar a organizar suas finanças — e te dar suporte se precisar de algo no caminho.</p>
+
+    <form id="form-cadastro" novalidate>
+      <div class="field">
+        <label for="f-nome">Nome</label>
+        <input id="f-nome" name="nome" type="text" placeholder="Seu nome completo" autocomplete="name" required>
+      </div>
+      <div class="field">
+        <label for="f-email">E-mail</label>
+        <input id="f-email" name="email" type="email" placeholder="seu@email.com" autocomplete="email" required>
+      </div>
+      <div class="field">
+        <label for="f-tel">Telefone (WhatsApp)</label>
+        <input id="f-tel" name="telefone" type="tel" placeholder="(11) 91234-5678" autocomplete="tel" required>
+      </div>
+      <div class="err" id="err-msg"></div>
+      <button class="btn" id="btn-continuar" type="submit">Continuar</button>
+    </form>
+    <div class="foot">Seus dados são usados apenas para contato sobre o FinanceFlow.</div>
+  </div>
+</div>
+
+<script>
+  // ── EmailJS (mesma conta já usada no app para o fluxo de e-mail) ──
+  const EMAILJS_PUBLIC_KEY   = 'OuL4ntzJMq0XJrAFL';
+  const EMAILJS_SERVICE      = 'service_i55pazr';
+  const EMAILJS_TEMPLATE     = 'SUBSTITUA_PELO_ID_DO_NOVO_TEMPLATE';
+  const EMAIL_DONO           = 'finance26.flowff@gmail.com';
+
+  emailjs.init(EMAILJS_PUBLIC_KEY);
+
+  function fmtTelInput(v){
+    v = v.replace(/\D/g,'').slice(0,11);
+    if(v.length > 6) return `(${v.slice(0,2)}) ${v.slice(2,7)}-${v.slice(7)}`;
+    if(v.length > 2) return `(${v.slice(0,2)}) ${v.slice(2)}`;
+    return v;
+  }
+  document.getElementById('f-tel').addEventListener('input', (e)=>{
+    e.target.value = fmtTelInput(e.target.value);
+  });
+
+  function mensagemBoasVindas(nome){
+    const primeiroNome = (nome||'').trim().split(' ')[0] || 'tudo bem';
+    return `Olá, ${primeiroNome}! 👋
+
+Que bom ter você por aqui!
+
+Você acabou de dar o primeiro passo pra organizar suas finanças de um jeito simples e rápido — direto pela voz, sem planilha e sem complicação.
+
+Agora é só escolher o plano que combina mais com você na próxima página. Qualquer dúvida antes de decidir, é só responder este e-mail: estamos aqui pra te ajudar de verdade.
+
+Um abraço,
+Equipe FinanceFlow`;
+  }
+
+  const form = document.getElementById('form-cadastro');
+  const btn = document.getElementById('btn-continuar');
+  const errEl = document.getElementById('err-msg');
+
+  function showErr(msg){ errEl.textContent = msg; errEl.style.display = 'block'; }
+  function hideErr(){ errEl.style.display = 'none'; }
+
+  form.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    hideErr();
+
+    const nome = document.getElementById('f-nome').value.trim();
+    const email = document.getElementById('f-email').value.trim();
+    const telefone = document.getElementById('f-tel').value.trim();
+
+    if(!nome){ showErr('Digite seu nome.'); return; }
+    if(!/^\S+@\S+\.\S+$/.test(email)){ showErr('Digite um e-mail válido.'); return; }
+    if(telefone.replace(/\D/g,'').length < 10){ showErr('Digite um telefone válido com DDD.'); return; }
+
+    btn.disabled = true;
+    btn.textContent = 'Enviando...';
+
+    try{
+      localStorage.setItem('ff_lead', JSON.stringify({nome, email, telefone, data: new Date().toISOString()}));
+    }catch(e){}
+
+    const agora = new Date().toLocaleString('pt-BR');
+
+    const enviarBoasVindas = emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE, {
+      to_email: email,
+      to_name: nome,
+      subject: 'Bem-vindo(a) ao FinanceFlow! 🎉',
+      message: mensagemBoasVindas(nome)
+    }).catch(err => console.error('[FinanceFlow] erro e-mail boas-vindas:', err));
+
+    const enviarNotificacao = emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE, {
+      to_email: EMAIL_DONO,
+      to_name: 'FinanceFlow',
+      subject: 'Novo pré-cadastro no FinanceFlow',
+      message: `Novo pré-cadastro recebido:\n\nNome: ${nome}\nE-mail: ${email}\nTelefone: ${telefone}\nData: ${agora}`
+    }).catch(err => console.error('[FinanceFlow] erro e-mail notificação:', err));
+
+    // Não trava o redirecionamento caso o e-mail demore ou falhe — o
+    // cadastro (localStorage) já foi salvo, e o objetivo principal
+    // (levar a pessoa para os planos) não pode depender da rede de e-mail.
+    Promise.race([
+      Promise.allSettled([enviarBoasVindas, enviarNotificacao]),
+      new Promise(res => setTimeout(res, 4000))
+    ]).finally(()=>{
+      window.location.href = './assinar.html';
+    });
+  });
+</script>
+</body>
+</html>
