@@ -84,7 +84,7 @@
   // ── EmailJS (mesma conta já usada no app para o fluxo de e-mail) ──
   const EMAILJS_PUBLIC_KEY   = 'OuL4ntzJMq0XJrAFL';
   const EMAILJS_SERVICE      = 'service_i55pazr';
-  const EMAILJS_TEMPLATE     = 'SUBSTITUA_PELO_ID_DO_NOVO_TEMPLATE';
+  const EMAILJS_TEMPLATE     = 'template_jjuli1s';
   const EMAIL_DONO           = 'finance26.flowff@gmail.com';
 
   emailjs.init(EMAILJS_PUBLIC_KEY);
@@ -144,6 +144,7 @@ Equipe FinanceFlow`;
     const enviarBoasVindas = emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE, {
       to_email: email,
       to_name: nome,
+      reply_to: EMAIL_DONO,
       subject: 'Bem-vindo(a) ao FinanceFlow! 🎉',
       message: mensagemBoasVindas(nome)
     }).catch(err => console.error('[FinanceFlow] erro e-mail boas-vindas:', err));
@@ -151,6 +152,7 @@ Equipe FinanceFlow`;
     const enviarNotificacao = emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE, {
       to_email: EMAIL_DONO,
       to_name: 'FinanceFlow',
+      reply_to: email,
       subject: 'Novo pré-cadastro no FinanceFlow',
       message: `Novo pré-cadastro recebido:\n\nNome: ${nome}\nE-mail: ${email}\nTelefone: ${telefone}\nData: ${agora}`
     }).catch(err => console.error('[FinanceFlow] erro e-mail notificação:', err));
