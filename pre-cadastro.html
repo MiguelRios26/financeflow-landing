@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>FinanceFlow — Cadastro rápido</title>
 <link rel="icon" href="./icon-192.png" type="image/png">
-<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
   :root{
     --bg:#060809; --bg2:#0c1216; --card:#12161a; --border:rgba(255,255,255,.08);
@@ -87,7 +87,7 @@
   const EMAILJS_TEMPLATE     = 'template_jjuli1s';
   const EMAIL_DONO           = 'finance26.flowff@gmail.com';
 
-  emailjs.init(EMAILJS_PUBLIC_KEY);
+  emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
 
   function fmtTelInput(v){
     v = v.replace(/\D/g,'').slice(0,11);
